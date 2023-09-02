@@ -376,6 +376,7 @@ int dbMenuInputHandler(int choice)
         printObjects(db);
         break;
     }
+
     case (int)DbMenu::AddObject:
     {
         Object obj;
@@ -388,9 +389,22 @@ int dbMenuInputHandler(int choice)
         printMsg("Объект успешно добавлен...");
         break;
     }
+
+    case (int)DbMenu::DelObject:
+    {
+        std::string input;
+        CLS;
+        cout << "Укажите имя объекта для удаления: ";
+        std::getline(cin, input);
+        cout << "\nБыло удалено объектов: " << db.removeObjectByName(input) << "\n\n";
+        printMsg("Нажмите любую клавишу...");
+        break;
+    }
+
     case (int)DbMenu::GroupBy:
         useMenu(drawGroupByMenu, groupByMenuHandler);
         break;
+
     case (int)DbMenu::SaveToFile:
         CLS;
         if (db.save())
@@ -398,8 +412,10 @@ int dbMenuInputHandler(int choice)
         else
             printMsg("Ошибка сохранения файла...");
         break;
+
     case (int)DbMenu::Exit:
         return -1;
+
     default:
         printMsg("Выберете действие из списка...\n");
         break;

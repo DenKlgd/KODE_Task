@@ -21,6 +21,7 @@ void drawDbMenu()
     cout << "Выберете действие:\n\n";
     cout << (int)DbMenu::ReadFile << ") Просмотр файла\n";
     cout << (int)DbMenu::AddObject << ") Добавить объект\n";
+    cout << (int)DbMenu::DelObject << ") Удалить объект\n";
     cout << (int)DbMenu::GroupBy << ") Группировать\n";
     cout << (int)DbMenu::SaveToFile << ") Сохранить изменения\n";
     cout << (int)DbMenu::Exit << ") Выйти\n\n";

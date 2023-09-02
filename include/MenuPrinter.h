@@ -17,6 +17,7 @@ enum class DbMenu
 {
     ReadFile = 1,
     AddObject,
+    DelObject,
     GroupBy,
     SaveToFile,
     Exit
