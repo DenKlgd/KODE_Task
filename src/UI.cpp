@@ -108,7 +108,6 @@ void printObjects(Database& db)
     printHeader();
     for (auto& obj : list)
     {
-        //cout << obj << '\n';
         printObjF(obj);
     }
 
@@ -121,7 +120,6 @@ void printSet(const ObjectGroup &list)
 
     for (auto& obj : list)
     {
-        //cout << *obj << '\n';
         printObjF(*obj);
     }
 
