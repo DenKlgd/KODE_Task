@@ -7,7 +7,9 @@ Database db;
 
 int main()
 {
-    system("chcp 1251");
+    #ifdef _WIN32
+        system("chcp 1251");
+    #endif
 
     useMenu(drawMenu, menuInputHandler);
 

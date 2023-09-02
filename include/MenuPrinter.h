@@ -2,6 +2,8 @@
 
 #ifdef _WIN32
     #define CLS system("cls")
+#elif unix
+    #define CLS system("clear")
 #endif
 
 
