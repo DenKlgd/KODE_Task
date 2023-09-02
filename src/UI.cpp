@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "../include/UI.h"
 #include "../include/MenuPrinter.h"
 #include "../include/Database.h"
@@ -25,6 +26,16 @@ void printMsg(const std::string& msg)
 {
     cout << msg;
     while (!getchar());
+}
+
+void printHeader()
+{
+    cout << std::setw(10) << "Имя" << std::setw(10) << "X" << std::setw(10) << "Y" << std::setw(15) << "Тип" << std::setw(20) << "Время создания" << "\n\n";
+}
+
+void printObjF(const Object& obj)
+{
+    cout << std::setw(10) << obj._name << std::setw(10) << obj._x << std::setw(10) << obj._y << std::setw(15) << obj._type << std::setw(20) << obj._time << '\n';
 }
 
 bool openDB()
@@ -94,9 +105,11 @@ void printObjects(Database& db)
 {
     auto& list = db.getObjectList();
 
+    printHeader();
     for (auto& obj : list)
     {
-        cout << obj << '\n';
+        //cout << obj << '\n';
+        printObjF(obj);
     }
 
     printTrailer(list.empty());
@@ -104,9 +117,12 @@ void printObjects(Database& db)
 
 void printSet(const ObjectGroup &list)
 {
+    printHeader();
+
     for (auto& obj : list)
     {
-        cout << *obj << '\n';
+        //cout << *obj << '\n';
+        printObjF(*obj);
     }
 
     printTrailer(list.empty());
@@ -118,7 +134,8 @@ void printGrouppedByDistance(Database& db, double d)
 
     for (auto& pair : list)
     {
-        cout << pair.first << " : " << *pair.second << '\n';
+        cout << std::setw(9) << pair.first << " : ";
+        printObjF(*pair.second);
     }
 
     printTrailer(list.empty());
