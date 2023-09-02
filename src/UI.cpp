@@ -257,7 +257,7 @@ int nameSortMenuInputHandler(int choice)
         } while (input.length() != 1);
         
         CLS;
-        std::regex regex(std::string("^") + input[0]);
+        std::regex regex(std::string("^") + toUpper(input[0]));
         printGrouppedByName(db, regex);
         break;
     }

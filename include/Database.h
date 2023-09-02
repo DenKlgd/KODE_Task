@@ -12,6 +12,12 @@ using ObjectList = std::list<Object>;
 using ObjectGroup = std::multiset<const Object*, bool (*)(const Object* obj1, const Object* obj2)>;
 using ObjectDistanceGroup = std::multimap<double, const Object*, bool (*)(double, double)>;
 
+char toLower(char chr);
+char toUpper(char chr);
+std::string& strToLower(std::string& str);
+std::string& strToUpper(std::string& str);
+std::string& beautifyStr(std::string& str);
+
 std::ostream& operator<< (std::ostream& stream, const Object& obj);
 std::istream& operator>> (std::istream& stream, Object& obj);
 

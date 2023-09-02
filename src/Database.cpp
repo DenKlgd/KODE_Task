@@ -4,6 +4,47 @@
 #include <unordered_map>
 
 
+char toLower(char chr)
+{
+    if (chr >= 'А' && chr <= 'Я')
+        chr += 32;
+    else
+        chr = std::tolower(chr);
+    return chr;
+}
+
+char toUpper(char chr)
+{
+    if (chr >= 'а' && chr <= 'я')
+        chr -= 32;
+    else
+        chr = std::toupper(chr);
+    return chr;
+}
+
+std::string& strToLower(std::string& str)
+{
+    for (auto& chr : str)
+        chr = toLower(chr);
+    return str;
+}
+
+std::string& strToUpper(std::string& str)
+{
+    for (auto& chr : str)
+        chr = toUpper(chr);
+    return str;
+}
+
+std::string& beautifyStr(std::string& str)
+{
+    strToLower(str);
+    if (!str.empty()) 
+        str[0] = toUpper(str[0]);
+    return str;
+}
+
+
 std::ostream& operator<< (std::ostream& stream, const Object& obj)
 {
     stream << obj._name << ' ' << obj._x << ' ' << obj._y << ' ' << obj._type << ' ' << obj._time;
@@ -13,6 +54,8 @@ std::ostream& operator<< (std::ostream& stream, const Object& obj)
 std::istream& operator>> (std::istream& stream, Object& obj)
 {
     stream >> obj._name >> obj._x >> obj._y >> obj._type >> obj._time;
+    beautifyStr(obj._name);
+    beautifyStr(obj._type);
     return stream;
 }
 
@@ -71,15 +114,19 @@ bool Database::addObject(const Object& obj)
         return false;
 
     _list.emplace_back(obj);
+    beautifyStr(_list.back()._name);
+    beautifyStr(_list.back()._type);
     return true;
 }
 
 std::size_t Database::removeObjectByName(const std::string& name)
 {
     std::size_t counter = 0;
+    std::string nameTmp = name;
+    beautifyStr(nameTmp);
 
     _list.remove_if( [&] (Object& obj) -> bool {
-        if (obj._name == name)
+        if (obj._name == nameTmp)
         {
             counter++;
             return true;
@@ -188,10 +235,12 @@ static auto cmp = [] (const Object* obj1, const Object* obj2) -> bool
 const ObjectGroup Database::groupByType(const std::string& type)
 {
     ObjectGroup sortedObjects(cmp);
+    std::string typeTmp = type;
+    beautifyStr(typeTmp);
 
     for (auto& obj : _list)
     {
-        if (obj._type == type)
+        if (obj._type == typeTmp)
             sortedObjects.insert(&obj);
     }
 
