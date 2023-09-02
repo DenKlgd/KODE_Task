@@ -18,8 +18,14 @@ set(SOURCES
     main.cpp
 )
 
-if(WIN32)
-    add_compile_options(/source-charset:utf-8)
+if(CMAKE_HOST_WIN32)
+    if (MSVC)
+        add_compile_options(/source-charset:utf-8)
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        add_compile_options(/source-charset:utf-8)
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        add_compile_options(-finput-charset=utf-8)
+    endif()
 endif()
 
 add_executable(ObjectListApp ${SOURCES})
