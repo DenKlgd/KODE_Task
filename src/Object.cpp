@@ -22,7 +22,7 @@ bool checkIfFloat(const std::string& str)
     if (str.empty() || str == "-" || str == "-.")
         return false;
 
-    if (!isdigit(str[0]) && str[0] != '-')
+    if (str[0] != '-' && !isdigit((uint8_t)str[0]))
         return false;
 
     char dotCount = 0;
